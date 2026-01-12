@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider   = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+   url      = env("DATABASE_URL")
+}
+
+model Museum {
+  id          Int          @id @default(autoincrement())
+  name        String
+  address     String
+  officialUrl String
+  description String?
+  exhibitions Exhibition[]
+}
+
+model Exhibition {
+  id          Int      @id @default(autoincrement())
+  title       String
+  startDate   DateTime
+  endDate     DateTime
+  officialUrl String
+  description String?
+  museumId    Int
+  museum      Museum   @relation(fields: [museumId], references: [id])
+}
