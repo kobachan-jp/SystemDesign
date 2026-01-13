@@ -9,27 +9,30 @@ export async function GET() {
 
 //展覧会を登録
 export async function POST(req: NextRequest) {
-  const { name, address, officialUrl, description } = await req.json()
-  if (!name || !address || !officialUrl) {
+  const { title, startDate, endDate, officialUrl, description, museumId } =
+    await req.json()
+  if (!title || !startDate || !endDate || !officialUrl || !museumId) {
     return NextResponse.json(
-      { error: 'name, address, officialUrl are required' },
+      {
+        error: 'title, startDate, endDate, officialUrl, museumId are required',
+      },
       { status: 400 },
     )
   }
 
-  const museum = await prisma.museum.create({
-    data: { name, address, officialUrl, description },
+  const exhibition = await prisma.exhibition.create({
+    data: { title, startDate, endDate, officialUrl, description, museumId },
   })
 
   return NextResponse.json(
-    { message: 'Create Successfully', museum },
+    { message: 'Create Successfully', exhibition },
     { status: 201 },
   )
 }
 
 //展覧会を削除
 export async function DELETE(req: NextRequest) {
-  //URL:/api/rest/museums/${id}など
+  //URL:/api/rest/exhibitions/${id}など
   const id = req.nextUrl.searchParams.get('id')
   if (!id) {
     return NextResponse.json({ error: 'id is required' }, { status: 400 })
