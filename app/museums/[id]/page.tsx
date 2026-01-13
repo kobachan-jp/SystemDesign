@@ -2,24 +2,7 @@
 
 import Link from 'next/link'
 import { useCallback, useEffect, useState, use } from 'react'
-
-type Exhibition = {
-  id: number
-  title: string
-  startDate: string
-  endDate: string
-  officialUrl: string
-  description?: string
-}
-
-type Museum = {
-  id: number
-  name: string
-  address: string
-  officialUrl: string
-  description?: string
-  exhibitions: Exhibition[]
-}
+import { Museum } from '@/app/lib/type'
 
 export default function MuseumDetail({
   params,
