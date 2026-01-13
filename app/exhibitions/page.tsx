@@ -34,12 +34,12 @@ export default function MuseumList() {
       <ul>
         {exhibitions.map((e) => (
           <li key={e.id}>
-            <Link href={`/museums/${e.id}`}>{e.title}</Link>
+            <Link href={`/exhibitions/${e.id}`}>{e.title}</Link>
             <button onClick={() => handleDelete(e.id)}>削除</button>
           </li>
         ))}
       </ul>
-      <Link href="/museums/add">
+      <Link href="/exhibitions/add">
         <button>展覧会を追加</button>
       </Link>
     </main>
