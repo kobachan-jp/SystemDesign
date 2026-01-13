@@ -3,8 +3,19 @@ import prisma from '@/app/lib/prisma'
 
 //展覧会一覧を取得
 export async function GET() {
-  const exhibitions = await prisma.exhibition.findMany()
-  return NextResponse.json(exhibitions)
+  const exhibitions = await prisma.exhibition.findMany({
+    orderBy: {
+      id: 'desc',
+    },
+    include: { museum: true },
+  })
+  const formatted = exhibitions.map((ex) => ({
+    ...ex,
+    startDate: ex.startDate.getTime(), // ミリ秒
+    endDate: ex.endDate.getTime(),
+  }))
+
+  return NextResponse.json(formatted)
 }
 
 //展覧会を登録

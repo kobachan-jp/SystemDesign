@@ -6,13 +6,43 @@ import Link from 'next/link'
 
 export default function ExhibitionList() {
   const [exhibitions, setExhibitions] = useState<Exhibition[]>([])
+  const [mode, setMode] = useState<'rest' | 'graphql'>('rest')
+
+  // 展覧会取得関数
+  const fetchExhibitions = async () => {
+    if (mode === 'rest') {
+      // REST
+      const res = await fetch('/api/rest/exhibitions')
+      const data = await res.json()
+      setExhibitions(data)
+    } else {
+      // GraphQL
+      const query = `
+        query {
+          exhibitions(limit:5) {
+            id
+            title
+            startDate
+            endDate
+            museum {
+              name
+            }
+          }
+        }
+      `
+      const res = await fetch('/api/graphql', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query }),
+      })
+      const data = await res.json()
+      setExhibitions(data.data.exhibitions)
+    }
+  }
 
   useEffect(() => {
-    fetch('/api/rest/exhibitions')
-      .then((res) => res.json())
-      .then(setExhibitions)
-  }, [])
-
+    fetchExhibitions()
+  }, [mode]) // モードが変わったら再取得
   return (
     <main>
       <nav style={{ marginBottom: '1rem' }}>
@@ -32,6 +62,23 @@ export default function ExhibitionList() {
           <button>展覧会を追加</button>
         </Link>
       </nav>
+
+      <div style={{ marginBottom: '1rem' }}>
+        <button
+          onClick={() => setMode('rest')}
+          disabled={mode === 'rest'}
+          style={{ marginRight: '0.5rem' }}
+        >
+          REST
+        </button>
+        <button
+          onClick={() => setMode('graphql')}
+          disabled={mode === 'graphql'}
+        >
+          GraphQL
+        </button>
+      </div>
+
       <h1>最新展覧会（5件）</h1>
 
       <ul>
@@ -43,8 +90,8 @@ export default function ExhibitionList() {
 
             <div>
               開催期間：
-              {new Date(ex.startDate).toLocaleDateString('ja-JP')} 〜
-              {new Date(ex.endDate).toLocaleDateString('ja-JP')}
+              {new Date(Number(ex.startDate)).toLocaleDateString('ja-JP')} 〜
+              {new Date(Number(ex.endDate)).toLocaleDateString('ja-JP')}
             </div>
             <div>開催美術館：{ex.museum?.name ?? '取得されていません'}</div>
             {/*
@@ -57,11 +104,10 @@ export default function ExhibitionList() {
           </li>
         ))}
       </ul>
-
       <p style={{ marginTop: '1rem', fontSize: '0.8em', color: 'gray' }}>
-        ※ REST API では、公式URL・説明・美術館の詳細情報など
-        表示に不要なデータも含めて全件取得している 実際に取得した展覧会数：
-        {exhibitions.length} 件
+        {mode === 'rest' ? 'REST API' : 'GraphQL'} で取得した展覧会情報 <br />
+        件数：{exhibitions.length} 件 <br />
+        フィールド数：{exhibitions[0] ? Object.keys(exhibitions[0]).length : 0}
       </p>
     </main>
   )
