@@ -39,7 +39,7 @@ export default function MuseumList() {
           </li>
         ))}
       </ul>
-      <Link href="/exhibitions/add">
+      <Link href="/exhibitions/new">
         <button>展覧会を追加</button>
       </Link>
     </main>
