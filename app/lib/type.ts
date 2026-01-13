@@ -15,5 +15,5 @@ export type Exhibition = {
   officialUrl: string
   description?: string
   museumId: number
-  museum: Museum
+  museum?: Museum
 }

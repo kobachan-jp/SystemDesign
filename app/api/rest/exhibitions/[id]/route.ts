@@ -37,20 +37,28 @@ export async function PUT(
     const id = Number(idStr)
     const body = await req.json()
 
-    const { name, address, officialUrl, description } = body
-    if (!name || !address || !officialUrl) {
+    const { title, startDate, endDate, officialUrl, description, museumId } =
+      body
+    if (!title || !startDate || !endDate || !officialUrl || museumId == null) {
       return NextResponse.json(
         { error: 'name, address, URLを入力してください' },
         { status: 400 },
       )
     }
 
-    const updateMuseum = await prisma.museum.update({
+    const updateExhibition = await prisma.exhibition.update({
       where: { id },
-      data: { name, address, officialUrl, description },
+      data: {
+        title,
+        startDate: new Date(startDate),
+        endDate: new Date(endDate),
+        officialUrl,
+        description,
+        museumId: Number(museumId),
+      },
     })
 
-    return NextResponse.json(updateMuseum)
+    return NextResponse.json(updateExhibition)
   } catch (err) {
     console.error(err)
     return NextResponse.json(

@@ -2,21 +2,15 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { Exhibition } from '../lib/type'
 
-type Exhibitions = {
-  id: number
-  title: string
-  officialUrl: string
-  descriptions: string
-}
-
-export default function MuseumList() {
-  const [exhibitions, setExhibitions] = useState<Exhibitions[]>([])
+export default function ExhibitionList() {
+  const [exhibition, setExhibition] = useState<Exhibition[]>([])
 
   const fetchExhibitions = () => {
     fetch('/api/rest/exhibitions')
       .then((res) => res.json())
-      .then(setExhibitions)
+      .then(setExhibition)
   }
 
   useEffect(() => {
@@ -32,7 +26,7 @@ export default function MuseumList() {
     <main>
       <h1>展覧会一覧</h1>
       <ul>
-        {exhibitions.map((e) => (
+        {exhibition.map((e) => (
           <li key={e.id}>
             <Link href={`/exhibitions/${e.id}`}>{e.title}</Link>
             <button onClick={() => handleDelete(e.id)}>削除</button>
