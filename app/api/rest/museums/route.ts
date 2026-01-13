@@ -26,18 +26,3 @@ export async function POST(req: NextRequest) {
     { status: 201 },
   )
 }
-
-//美術館を削除
-export async function DELETE(req: NextRequest) {
-  //URL:/api/rest/museums?id=1など
-  const id = req.nextUrl.searchParams.get('id')
-  if (!id) {
-    return NextResponse.json({ error: 'id is required' }, { status: 400 })
-  }
-
-  const deleted = await prisma.museum.delete({
-    where: { id: Number(id) },
-  })
-
-  return NextResponse.json(deleted)
-}

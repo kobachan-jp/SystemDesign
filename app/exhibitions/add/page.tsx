@@ -9,11 +9,11 @@ export default function MuseumAddPage() {
 
   // フォーム用 state
   const [title, setTitle] = useState<string>('')
-  const [startDate, setStartDate] = useState<string>()
-  const [endDate, setEndDate] = useState<string>()
+  const [startDate, setStartDate] = useState<string>('')
+  const [endDate, setEndDate] = useState<string>('')
   const [officialUrl, setOfficialUrl] = useState<string>('')
   const [description, setDescription] = useState<string>('')
-  const [museumId, setMuseumId] = useState<number>()
+  const [museumId, setMuseumId] = useState<number | null>(null)
   const [museums, setMuseum] = useState<Museum[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
@@ -46,7 +46,7 @@ export default function MuseumAddPage() {
 
       if (!res.ok) {
         const data: Exhibition = await res.json()
-        throw new Error('Failed to add museum')
+        throw new Error('Failed to add exhibition')
       }
 
       // 成功したら一覧ページに遷移
@@ -70,10 +70,12 @@ export default function MuseumAddPage() {
         style={{ display: 'grid', gap: '0.5rem', maxWidth: '400px' }}
       >
         <label>
-          美術館を選択
+          美術館を選択：
           <select
-            value={museumId}
-            onChange={(e) => setMuseumId(Number(e.target.value))}
+            value={museumId ?? ''}
+            onChange={(e) =>
+              setMuseumId(e.target.value ? Number(e.target.value) : null)
+            }
             required
           >
             <option value="">選択してください</option>
