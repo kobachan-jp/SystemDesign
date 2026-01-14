@@ -13,6 +13,7 @@ export default function ExhibitionList() {
       // REST API
       const res = await fetch('/api/rest/exhibitions')
       const data = await res.json()
+      console.log('REST:', data)
       setExhibition(data)
     } else {
       // GraphQL
@@ -30,7 +31,7 @@ export default function ExhibitionList() {
         body: JSON.stringify({ query }),
       })
       const data = await res.json()
-      //console.log(data)
+      console.log('GraphQL:', data)
       setExhibition(data.data.exhibitions)
     }
   }

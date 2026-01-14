@@ -14,6 +14,7 @@ export default function ExhibitionList() {
       // REST
       const res = await fetch('/api/rest/exhibitions')
       const data = await res.json()
+      console.log(data)
       setExhibitions(data)
     } else {
       // GraphQL
@@ -37,6 +38,7 @@ export default function ExhibitionList() {
       })
       const data = await res.json()
       setExhibitions(data.data.exhibitions)
+      console.log(data)
     }
   }
 
@@ -79,7 +81,7 @@ export default function ExhibitionList() {
         </button>
       </div>
 
-      <h1>最新展覧会（5件）</h1>
+      <h1>最新登録展覧会（5件）</h1>
 
       <ul>
         {exhibitions.slice(0, 5).map((ex) => (
@@ -106,6 +108,8 @@ export default function ExhibitionList() {
       </ul>
       <p style={{ marginTop: '1rem', fontSize: '0.8em', color: 'gray' }}>
         {mode === 'rest' ? 'REST API' : 'GraphQL'} で取得した展覧会情報 <br />
+        件数：{exhibitions.length}
+        <br />
         フィールド数：{exhibitions[0] ? Object.keys(exhibitions[0]).length : 0}
       </p>
     </main>

@@ -134,7 +134,7 @@ export default function MuseumDetail({
         {mode === 'rest' ? 'REST API' : 'GraphQL'} で取得した美術館・博物館情報{' '}
         <br />
         フィールド数：
-        {museum.exhibitions[0] ? Object.keys(museum.exhibitions[0]).length : 0}
+        {museum ? Object.keys(museum).length : 0}
       </p>
     </main>
   )

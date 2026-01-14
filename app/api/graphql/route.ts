@@ -3,5 +3,5 @@ import { schema } from './schema'
 
 export const POST = createYoga({
   schema,
-  graphqlEndpoint: '/api/graphql', // GraphQL のエンドポイント
+  graphqlEndpoint: '/api/graphql',
 })

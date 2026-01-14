@@ -7,14 +7,12 @@ export async function GET() {
     orderBy: {
       id: 'desc',
     },
-    take: 5,
   })
   const formatted = exhibitions.map((ex) => ({
     ...ex,
     startDate: ex.startDate.getTime(), // ミリ秒
     endDate: ex.endDate.getTime(),
   }))
-
   return NextResponse.json(formatted)
 }
 
