@@ -2,12 +2,12 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider   = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "sqlite"
-   url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model Museum {
@@ -27,5 +27,5 @@ model Exhibition {
   officialUrl String
   description String?
   museumId    Int
-  museum      Museum   @relation(fields: [museumId], references: [id])
+  museum      Museum   @relation(fields: [museumId], references: [id], onDelete: Cascade)
 }

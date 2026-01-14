@@ -15,7 +15,13 @@ export async function GET(
   if (!exhibition)
     return NextResponse.json({ error: 'Not Found' }, { status: 404 })
 
-  return NextResponse.json(exhibition)
+  const formatted = {
+    ...exhibition,
+    startDate: exhibition.startDate.getTime(),
+    endDate: exhibition.endDate.getTime(),
+  }
+
+  return NextResponse.json(formatted)
 }
 
 export async function DELETE(

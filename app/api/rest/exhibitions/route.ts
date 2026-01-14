@@ -7,7 +7,7 @@ export async function GET() {
     orderBy: {
       id: 'desc',
     },
-    include: { museum: true },
+    take: 5,
   })
   const formatted = exhibitions.map((ex) => ({
     ...ex,

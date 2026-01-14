@@ -1,6 +1,5 @@
 import { createSchema } from 'graphql-yoga'
 import prisma from '@/app/lib/prisma'
-import { Are_You_Serious } from 'next/font/google'
 
 export const schema = createSchema({
   typeDefs: /* GraphQL */ `

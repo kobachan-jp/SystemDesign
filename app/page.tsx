@@ -84,7 +84,7 @@ export default function ExhibitionList() {
       <ul>
         {exhibitions.slice(0, 5).map((ex) => (
           <li key={ex.id}>
-            <Link href={`/exhibitions/${ex.id}`} style={{ fontWeight: 'bold' }}>
+            <Link href={`/exhibitions/${ex.id}`} className="link-bold">
               {ex.title}
             </Link>
 
@@ -106,7 +106,6 @@ export default function ExhibitionList() {
       </ul>
       <p style={{ marginTop: '1rem', fontSize: '0.8em', color: 'gray' }}>
         {mode === 'rest' ? 'REST API' : 'GraphQL'} で取得した展覧会情報 <br />
-        件数：{exhibitions.length} 件 <br />
         フィールド数：{exhibitions[0] ? Object.keys(exhibitions[0]).length : 0}
       </p>
     </main>

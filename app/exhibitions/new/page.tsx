@@ -97,7 +97,7 @@ export default function MuseumAddPage() {
         </label>
 
         <label>
-          開催期間
+          開催開始
           <input
             type="date"
             value={startDate}
@@ -107,7 +107,7 @@ export default function MuseumAddPage() {
         </label>
 
         <label>
-          ～
+          最終日
           <input
             type="date"
             value={endDate}
