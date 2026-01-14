@@ -2,28 +2,27 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { Exhibition } from '../lib/type'
+import { Museum } from '../lib/type'
 
-export default function ExhibitionList() {
-  const [exhibition, setExhibition] = useState<Exhibition[]>([])
+export default function MuseumList() {
+  const [museums, setMuseums] = useState<Museum[]>([])
   const [mode, setMode] = useState<'rest' | 'graphql'>('rest')
 
-  const fetchExhibitions = async () => {
+  const fetchMuseums = async () => {
     if (mode === 'rest') {
       // REST API
-      const res = await fetch('/api/rest/exhibitions')
+      const res = await fetch('/api/rest/museums')
       const data = await res.json()
-      console.log('REST:', data)
-      setExhibition(data)
+      setMuseums(data)
     } else {
       // GraphQL
       const query = `
-       query {
-            exhibitions {
-              id
-              title
-            }
+        query {
+          museums {
+            id
+            name
           }
+        }
       `
       const res = await fetch('/api/graphql', {
         method: 'POST',
@@ -31,23 +30,22 @@ export default function ExhibitionList() {
         body: JSON.stringify({ query }),
       })
       const data = await res.json()
-      console.log('GraphQL:', data)
-      setExhibition(data.data.exhibitions)
+      setMuseums(data.data.museums)
     }
   }
 
   useEffect(() => {
-    fetchExhibitions()
+    fetchMuseums()
   }, [mode])
 
   const handleDelete = async (id: number) => {
-    await fetch(`/api/rest/exhibitions/${id}`, { method: 'DELETE' })
-    fetchExhibitions()
+    await fetch(`/api/rest/museums/${id}`, { method: 'DELETE' })
+    fetchMuseums()
   }
 
   return (
     <main>
-      <h1>展覧会一覧</h1>
+      <h1>美術館・博物館一覧</h1>
       <div style={{ marginBottom: '1rem' }}>
         <button
           onClick={() => setMode('rest')}
@@ -64,24 +62,26 @@ export default function ExhibitionList() {
         </button>
       </div>
       <ul>
-        {exhibition.map((e) => (
-          <li key={e.id}>
-            <Link className="link-bold" href={`/exhibitions/${e.id}`}>
-              {e.title}
+        {museums.map((m) => (
+          <li key={m.id}>
+            <Link className="link-bold" href={`/museums/${m.id}`}>
+              {m.name}
             </Link>
-            <button className="delete-btn" onClick={() => handleDelete(e.id)}>
+            <button className="delete-btn" onClick={() => handleDelete(m.id)}>
               削除
             </button>
           </li>
         ))}
       </ul>
-      <Link href="/exhibitions/new">
-        <button>展覧会を追加</button>
-      </Link>
       <p style={{ marginTop: '1rem', fontSize: '0.8em', color: 'gray' }}>
-        {mode === 'rest' ? 'REST API' : 'GraphQL'} で取得した展覧会情報 <br />
-        フィールド数：{exhibition[0] ? Object.keys(exhibition[0]).length : 0}
+        {mode === 'rest' ? 'REST API' : 'GraphQL'} で取得した美術館・博物館情報{' '}
+        <br />
+        フィールド数：{museums[0] ? Object.keys(museums[0]).length : 0}
       </p>
+
+      <Link href="/museums/new">
+        <button>美術館・博物館を追加</button>
+      </Link>
     </main>
   )
 }

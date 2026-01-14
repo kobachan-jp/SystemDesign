@@ -3,41 +3,45 @@ import prisma from '@/app/lib/prisma'
 
 //展覧会一覧を取得
 export async function GET() {
-  const exhibitions = await prisma.exhibitions.findMany()
-  return NextResponse.json(exhibitions)
+  const exhibitions = await prisma.exhibition.findMany({
+    orderBy: {
+      id: 'desc',
+    },
+  })
+  const formatted = exhibitions.map((ex) => ({
+    ...ex,
+    startDate: ex.startDate.getTime(), // ミリ秒
+    endDate: ex.endDate.getTime(),
+  }))
+  return NextResponse.json(formatted)
 }
 
 //展覧会を登録
 export async function POST(req: NextRequest) {
-  const { name, address, officialUrl, description } = await req.json()
-  if (!name || !address || !officialUrl) {
+  const { title, startDate, endDate, officialUrl, description, museumId } =
+    await req.json()
+  if (!title || !startDate || !endDate || !officialUrl || museumId == null) {
     return NextResponse.json(
-      { error: 'name, address, officialUrl are required' },
+      {
+        error: 'title, startDate, endDate, officialUrl, museumId are required',
+      },
       { status: 400 },
     )
   }
 
-  const museum = await prisma.museum.create({
-    data: { name, address, officialUrl, description },
+  const exhibition = await prisma.exhibition.create({
+    data: {
+      title,
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
+      officialUrl,
+      description,
+      museumId: Number(museumId),
+    },
   })
 
   return NextResponse.json(
-    { message: 'Create Successfully', museum },
+    { message: 'Create Successfully', exhibition },
     { status: 201 },
   )
-}
-
-//展覧会を削除
-export async function DELETE(req: NextRequest) {
-  //URL:/api/rest/museums/${id}など
-  const id = req.nextUrl.searchParams.get('id')
-  if (!id) {
-    return NextResponse.json({ error: 'id is required' }, { status: 400 })
-  }
-
-  const deleted = await prisma.exhibitions.delete({
-    where: { id: Number(id) },
-  })
-
-  return NextResponse.json(deleted)
 }

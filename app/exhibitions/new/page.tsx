@@ -1,30 +1,28 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-
-type Exhibition = {
-  id: number
-  title: string
-  startDate: Date
-  endDate: Date
-  officialUrl: string
-  description?: string
-  museumId: number
-}
+import { Museum, Exhibition } from '@/app/lib/type'
 
 export default function MuseumAddPage() {
   const router = useRouter()
 
   // フォーム用 state
   const [title, setTitle] = useState<string>('')
-  const [startDate, setStartDate] = useState<string>()
-  const [endDate, setEndDate] = useState<string>()
+  const [startDate, setStartDate] = useState<string>('')
+  const [endDate, setEndDate] = useState<string>('')
   const [officialUrl, setOfficialUrl] = useState<string>('')
   const [description, setDescription] = useState<string>('')
-  const [museumId, setMuseumId] = useState<number>()
+  const [museumId, setMuseumId] = useState<number | null>(null)
+  const [museums, setMuseum] = useState<Museum[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
+
+  useEffect(() => {
+    fetch('/api/rest/museums')
+      .then((res) => res.json())
+      .then(setMuseum)
+  }, [])
 
   // フォーム送信処理
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -48,7 +46,7 @@ export default function MuseumAddPage() {
 
       if (!res.ok) {
         const data: Exhibition = await res.json()
-        throw new Error('Failed to add museum')
+        throw new Error('Failed to add exhibition')
       }
 
       // 成功したら一覧ページに遷移
@@ -72,13 +70,21 @@ export default function MuseumAddPage() {
         style={{ display: 'grid', gap: '0.5rem', maxWidth: '400px' }}
       >
         <label>
-          美術館を選択
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+          美術館を選択：
+          <select
+            value={museumId ?? ''}
+            onChange={(e) =>
+              setMuseumId(e.target.value ? Number(e.target.value) : null)
+            }
             required
-          />
+          >
+            <option value="">選択してください</option>
+            {museums.map((m) => (
+              <option key={m.id} value={m.id}>
+                {m.name}
+              </option>
+            ))}
+          </select>
         </label>
         <label>
           展覧会タイトル：
@@ -91,21 +97,21 @@ export default function MuseumAddPage() {
         </label>
 
         <label>
-          開催期間
+          開催開始
           <input
             type="date"
             value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
+            onChange={(e) => setStartDate(e.target.value.slice(0, 10))}
             required
           />
         </label>
 
         <label>
-          ～
+          最終日
           <input
             type="date"
             value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
+            onChange={(e) => setEndDate(e.target.value.slice(0, 10))}
             required
           />
         </label>

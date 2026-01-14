@@ -1,26 +1,173 @@
+/* Tailwindの基本設定を残すなら残す */
 @import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* 全体のフォントと文字サイズ */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Geist', Arial, Helvetica, sans-serif;
+  font-size: 1.125rem; /* 18pxくらい */
+  background-color: #fff;
+  color: #171717;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* ヘッダータイトル */
+.header-title {
+  font-size: 2rem; /* 32pxくらい */
+  font-weight: 700;
+  background-color: #ffeb3b; /* 黄色背景 */
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+/* ボタン全体 */
+button {
+  font-size: 1rem; /* 16px */
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  background-color: #f0f0f0;
+  color: #171717;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #e0e0e0;
+}
+
+/* リンク付きテキストも少し大きく */
+link {
+  font-size: 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style-type: disc; /* 黒点 */
+  padding-left: 1.5rem; /* 黒点が見えるように左に余白 */
+  margin: 0;
+}
+
+ul li {
+  list-style-type: disc; /* 黒点 */
+  display: list-item; /* 黒点を表示させるために必要 */
+  font-size: 1rem; /* 文字サイズ */
+  margin-bottom: 0.5rem; /* 下の余白 */
+  padding-bottom: 0.5rem; /* 線と文字の距離 */
+  border-bottom: 1px solid #0f0e0e; /* 下線 */
+}
+
+ul li:last-child {
+  border-bottom: none; /* 最後の項目だけ線なし */
+}
+
+/* global.css の最後に追加 */
+.link-bold {
+  font-weight: bold; /* 太字 */
+  font-size: 1.125rem; /* 18pxくらい */
+  color: var(--foreground); /* 文字色はテーマに合わせる */
+  text-decoration: none; /* 下線なし */
+  transition: color 0.2s; /* ホバー時の変化をスムーズに */
+}
+
+.link-bold:hover {
+  text-decoration: underline; /* ホバーで下線 */
+  color: #f59e0b; /* オレンジ系に変化（好みで調整） */
+}
+
+h1 {
+  font-size: 2rem; /* 文字サイズ */
+  font-weight: bold; /* 太字 */
+  margin-bottom: 1rem; /* 下に余白 */
+}
+
+h2 {
+  font-size: 1.5rem; /* 文字サイズ */
+  font-weight: bold; /* 太字 */
+  margin-top: 5em;
+  margin-bottom: 1rem; /* 下に余白 */
+}
+
+/* p や div の文字サイズと行間を調整 */
+p,
+div {
+  font-size: 1rem; /* 少し大きめに */
+  line-height: 1.6; /* 行間を広げる */
+  margin-bottom: 0.4rem; /* 下に余白 */
+}
+
+.delete-btn {
+  margin-left: 3rem;
+  padding: 0.3rem 0.6rem; /* 少しボタンを大きめに */
+  background-color: #f56565; /* 赤っぽく */
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.delete-btn:hover {
+  background-color: #c53030; /* ホバーで少し濃く */
+}
+
+/* フォーム全体 */
+form {
+  display: grid;
+  gap: 2rem; /* 項目間を広めに */
+  max-width: 500px;
+}
+
+/* ラベル内の文字を大きく */
+form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.1rem; /* 文字を少し大きめ */
+  font-weight: 500;
+}
+
+/* テキスト入力やtextareaを大きめに */
+form input[type='text'],
+form input[type='url'],
+form input[type='date'],
+form select,
+form textarea {
+  font-size: 1rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin-top: 0.25rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* textareaは高さを少し確保 */
+form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* 送信ボタンを少し強調 */
+form button {
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  background-color: #3182ce; /* 青系 */
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+form button:hover:enabled {
+  background-color: #2b6cb0; /* ホバーで少し濃く */
 }
