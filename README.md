@@ -13,7 +13,8 @@ REST / GraphQL 比較用デモシステム
 ## 使用技術
 
 - Frontend: **Next.js (App Router), React, TypeScript**
-- Backend: **Next.js Route Handlers (REST API), GraphQL (graphql), GraphQL Yoga**
+- Backend (REST): **Next.js Route Handlers (REST API)**
+- Backend (GraphQL): **GraphQL (graphql), GraphQL Yoga**
 - ORM: **Prisma**
 - Database: **SQLite**
 
