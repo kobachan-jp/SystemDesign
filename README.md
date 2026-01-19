@@ -122,7 +122,7 @@ app/
 まずzipファイルを解凍してください.
 
 ```bash
-unzip museum-demo
+unzip museum-demo.zip
 ```
 
 ### 1. Node.js の確認
