@@ -43,33 +43,33 @@ REST / GraphQL 比較用デモシステム
 
 ## REST API 設計
 
-### TOPページ
-
-| Method | URL | 説明                  |
-| ------ | --- | --------------------- |
-| GET    | `/` | 最新登録展覧会5件表示 |
-
 ### Museums
 
-| Method | URL                 | 説明           |
-| ------ | ------------------- | -------------- |
-| GET    | `/museums`          | 美術館一覧取得 |
-| GET    | `/museums/:id`      | 美術館詳細取得 |
-| POST   | `/museums/new`      | 美術館作成     |
-| PUT    | `/museums/:id/edit` | 美術館更新     |
-| DELETE | `/museums/:id`      | 美術館削除     |
+| Method | URL                          | 説明           |
+| ------ | ---------------------------- | -------------- |
+| GET    | `/api/rest/museums`          | 美術館一覧取得 |
+| GET    | `/api/rest/museums/:id`      | 美術館詳細取得 |
+| POST   | `/api/rest/museums/new`      | 美術館作成     |
+| PUT    | `/api/rest/museums/:id/edit` | 美術館更新     |
+| DELETE | `/api/rest/museums/:id`      | 美術館削除     |
 
 ### Exhibitions
 
-| Method | URL                     | 説明       |
-| ------ | ----------------------- | ---------- |
-| GET    | `/exhibitions`          | 展覧会一覧 |
-| GET    | `/exhibitions/:id`      | 展覧会詳細 |
-| POST   | `/exhibitions/new`      | 展覧会追加 |
-| PUT    | `/exhibitions/:id/edit` | 展覧会更新 |
-| DELETE | `/exhibitions/:id`      | 展覧会削除 |
+| Method | URL                              | 説明       |
+| ------ | -------------------------------- | ---------- |
+| GET    | `/api/rest/exhibitions`          | 展覧会一覧 |
+| GET    | `/api/rest/exhibitions/:id`      | 展覧会詳細 |
+| POST   | `/api/rest/exhibitions/new`      | 展覧会追加 |
+| PUT    | `/api/rest/exhibitions/:id/edit` | 展覧会更新 |
+| DELETE | `/api/rest/exhibitions/:id`      | 展覧会削除 |
 
 ---
+
+### GraphQL API
+
+| URL            | 内容                   |
+| -------------- | ---------------------- |
+| `/api/graphql` | GraphQL エンドポイント |
 
 ## ディレクトリ構成（抜粋）
 
