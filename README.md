@@ -120,9 +120,11 @@ app/
 ## 環境構築手順
 
 まずzipファイルを解凍してください.
+その後,解凍したディレクトリに入ってください.
 
 ```bash
-unzip museum-demo
+unzip museum-demo.zip
+例：cd museum-demo
 ```
 
 ### 1. Node.js の確認
