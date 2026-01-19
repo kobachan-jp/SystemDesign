@@ -1,10 +1,8 @@
-/* Tailwindの基本設定を残すなら残す */
 @import 'tailwindcss';
 
-/* 全体のフォントと文字サイズ */
 body {
   font-family: 'Geist', Arial, Helvetica, sans-serif;
-  font-size: 1.125rem; /* 18pxくらい */
+  font-size: 1.125rem;
   background-color: #fff;
   color: #171717;
   line-height: 1.6;
@@ -14,9 +12,9 @@ body {
 
 /* ヘッダータイトル */
 .header-title {
-  font-size: 2rem; /* 32pxくらい */
+  font-size: 2rem;
   font-weight: 700;
-  background-color: #ffeb3b; /* 黄色背景 */
+  background-color: #ffeb3b;
   padding: 0.5rem 1rem;
   display: inline-block;
   border-radius: 0.25rem;
@@ -25,7 +23,7 @@ body {
 
 /* ボタン全体 */
 button {
-  font-size: 1rem; /* 16px */
+  font-size: 1rem;
   font-weight: 600;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
@@ -39,7 +37,7 @@ button:hover {
   background-color: #e0e0e0;
 }
 
-/* リンク付きテキストも少し大きく */
+/* リンク */
 link {
   font-size: 1rem;
   text-decoration: none;
@@ -47,63 +45,61 @@ link {
 }
 
 ul {
-  list-style-type: disc; /* 黒点 */
-  padding-left: 1.5rem; /* 黒点が見えるように左に余白 */
+  list-style-type: disc;
+  padding-left: 1.5rem;
   margin: 0;
 }
 
 ul li {
-  list-style-type: disc; /* 黒点 */
-  display: list-item; /* 黒点を表示させるために必要 */
-  font-size: 1rem; /* 文字サイズ */
-  margin-bottom: 0.5rem; /* 下の余白 */
-  padding-bottom: 0.5rem; /* 線と文字の距離 */
-  border-bottom: 1px solid #0f0e0e; /* 下線 */
+  list-style-type: disc;
+  display: list-item;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #0f0e0e;
 }
 
 ul li:last-child {
-  border-bottom: none; /* 最後の項目だけ線なし */
+  border-bottom: none;
 }
 
-/* global.css の最後に追加 */
 .link-bold {
-  font-weight: bold; /* 太字 */
-  font-size: 1.125rem; /* 18pxくらい */
-  color: var(--foreground); /* 文字色はテーマに合わせる */
-  text-decoration: none; /* 下線なし */
-  transition: color 0.2s; /* ホバー時の変化をスムーズに */
+  font-weight: bold;
+  font-size: 1.125rem;
+  color: var(--foreground);
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
 .link-bold:hover {
-  text-decoration: underline; /* ホバーで下線 */
-  color: #f59e0b; /* オレンジ系に変化（好みで調整） */
+  text-decoration: underline;
+  color: #f59e0b;
 }
 
 h1 {
-  font-size: 2rem; /* 文字サイズ */
-  font-weight: bold; /* 太字 */
-  margin-bottom: 1rem; /* 下に余白 */
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: 1.5rem; /* 文字サイズ */
-  font-weight: bold; /* 太字 */
+  font-size: 1.5rem;
+  font-weight: bold;
   margin-top: 5em;
-  margin-bottom: 1rem; /* 下に余白 */
+  margin-bottom: 1rem;
 }
 
-/* p や div の文字サイズと行間を調整 */
 p,
 div {
-  font-size: 1rem; /* 少し大きめに */
-  line-height: 1.6; /* 行間を広げる */
-  margin-bottom: 0.4rem; /* 下に余白 */
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.4rem;
 }
 
 .delete-btn {
   margin-left: 3rem;
-  padding: 0.3rem 0.6rem; /* 少しボタンを大きめに */
-  background-color: #f56565; /* 赤っぽく */
+  padding: 0.3rem 0.6rem;
+  background-color: #f56565;
   color: white;
   border: none;
   border-radius: 0.3rem;
@@ -112,25 +108,22 @@ div {
 }
 
 .delete-btn:hover {
-  background-color: #c53030; /* ホバーで少し濃く */
+  background-color: #c53030;
 }
 
-/* フォーム全体 */
 form {
   display: grid;
-  gap: 2rem; /* 項目間を広めに */
+  gap: 2rem;
   max-width: 500px;
 }
 
-/* ラベル内の文字を大きく */
 form label {
   display: flex;
   flex-direction: column;
-  font-size: 1.1rem; /* 文字を少し大きめ */
+  font-size: 1.1rem;
   font-weight: 500;
 }
 
-/* テキスト入力やtextareaを大きめに */
 form input[type='text'],
 form input[type='url'],
 form input[type='date'],
@@ -145,17 +138,15 @@ form textarea {
   box-sizing: border-box;
 }
 
-/* textareaは高さを少し確保 */
 form textarea {
   min-height: 80px;
   resize: vertical;
 }
 
-/* 送信ボタンを少し強調 */
 form button {
   font-size: 1.1rem;
   padding: 0.5rem 1rem;
-  background-color: #3182ce; /* 青系 */
+  background-color: #3182ce;
   color: white;
   border: none;
   border-radius: 0.3rem;
@@ -169,5 +160,5 @@ form button:disabled {
 }
 
 form button:hover:enabled {
-  background-color: #2b6cb0; /* ホバーで少し濃く */
+  background-color: #2b6cb0;
 }
