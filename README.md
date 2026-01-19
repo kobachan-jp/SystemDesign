@@ -63,13 +63,13 @@ REST / GraphQL 比較用デモシステム
 | PUT    | `/api/rest/exhibitions/:id/edit` | 展覧会更新 |
 | DELETE | `/api/rest/exhibitions/:id`      | 展覧会削除 |
 
----
-
 ### GraphQL API
 
 | URL            | 内容                   |
 | -------------- | ---------------------- |
 | `/api/graphql` | GraphQL エンドポイント |
+
+---
 
 ## ディレクトリ構成（抜粋）
 
